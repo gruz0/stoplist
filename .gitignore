@@ -1,0 +1,7 @@
+.data
+vendor/
+composer.lock
+dist/
+!build/.keep
+build/
+rulesets/

@@ -1,0 +1,22 @@
+#!/bin/bash
+set -euo pipefail
+
+red='\033[0;31m'
+green='\033[0;32m'
+NC='\033[0m'
+
+echo -e "${green}[PHP Style][Info]: Checking PHP Style${NC}"
+
+if ! make lint; then
+	echo -e "${red}[PHP Style][Error]: Fix the issues and commit again${NC}"
+	exit 1
+fi
+
+echo -e "${green}[Shellcheck][Info]: Checking shell scripts${NC}"
+
+if ! docker run --rm -v "$PWD:/mnt" koalaman/shellcheck:latest -- **/*.sh; then
+	echo -e "${red}[Shellcheck][Error]: Fix the issues and commit again${NC}"
+	exit 1
+fi
+
+exit 0

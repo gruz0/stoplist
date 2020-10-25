@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<ruleset name="Tags Stoplist">
+	<description>A custom set of rules to check for a WPized WordPress project</description>
+
+	<config name="installed_paths" value="rulesets/wpcs,vendor/phpcompatibility/php-compatibility/PHPCompatibility,vendor/phpcompatibility/phpcompatibility-wp/PHPCompatibilityWP,vendor/phpcompatibility/phpcompatibility-paragonie/PHPCompatibilityParagonieSodiumCompat" />
+
+	<exclude-pattern>/**/index.php</exclude-pattern>
+	<exclude-pattern>/build/*</exclude-pattern>
+	<exclude-pattern>/dist/*</exclude-pattern>
+	<exclude-pattern>/rulesets/*</exclude-pattern>
+	<exclude-pattern>/vendor/*</exclude-pattern>
+
+	<!-- Check for PHP cross-version compatibility -->
+	<config name="testVersion" value="7.0-" />
+
+	<rule ref="PHPCompatibility" />
+
+	<!-- WordPress Coding Standards -->
+	<config name="minimum_supported_wp_version" value="5.1"/>
+
+	<rule ref="WordPress-Core" />
+	<rule ref="WordPress-Docs" />
+	<rule ref="WordPress-Extra" />
+	<rule ref="WordPress.WP.I18n" />
+
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="Stoplist"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- Extra Rulesets -->
+	<rule ref="Generic.CodeAnalysis.UnusedFunctionParameter"/>
+	<rule ref="Generic.Commenting.Todo"/>
+</ruleset>
